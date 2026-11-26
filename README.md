@@ -1,98 +1,37 @@
-# BetterMove# Better Move – AI Landing Page
+# Better Move Massage — strona WWW
 
-## Opis projektu
-Profesjonalna strona landing page / portfolio dla firmy **Better Move** – specjalistów od wdrożeń AI i automatyzacji procesów biznesowych (MŚP). Strona zbudowana w stylistyce **Dark Mode + Glassmorphism** z animowanym tłem particle canvas, neonowymi efektami glow i pełnym RWD (Mobile First).
+Wersja gotowa do publikacji jako **statyczna strona na Vercel**, przygotowana dla `better-move.pl`.
 
----
+## Zawartość
 
-## ✅ Zrealizowane funkcjonalności
+- `index.html` — cała strona (SEO, polska treść, oferta, cennik, kontakt i dojazd).
+- `styles.css` — osobne, responsywne widoki telefonu, tabletu i komputera.
+- `script.js` — mobilne menu i wskazanie bieżącej sekcji.
+- `assets/` — grafika hero, logo, ikona strony i obraz podglądu społecznościowego.
+- `vercel.json`, `robots.txt`, `sitemap.xml` — pliki konfiguracji i SEO.
 
-| Sekcja | Opis |
-|--------|------|
-| **Navbar** | Sticky navigation z efektem blur po scrollu, aktywne linki, hamburger menu (mobile) |
-| **Hero** | Animowany SVG neural network, particles canvas, liczniki statystyk z animacją, CTA buttons |
-| **O nas** | Glass cards z ikonami SVG, historia i misja firmy |
-| **Oferta (Bento Grid)** | 5 kart usług: Agentic Workflows, Szkolenia, Audyt, Raporty AI, Integracje |
-| **Aktualności** | 6 dynamicznie renderowanych kart z rynku AI |
-| **Kontakt** | Formularz lead magnet (Name, Company, Email, Phone, Message) z walidacją i zapisem do API |
-| **Footer** | Linki nawigacyjne, branding, social media |
+Strona działa **bez budowania i bez npm**. Rezerwacja odbywa się przez przyciski `tel:+48784340292`.
 
-### Efekty wizualne
-- ✅ Animowane tło – canvas particles z flow pulses
-- ✅ Glassmorphism – `backdrop-filter: blur` na wszystkich kartach
-- ✅ Neon glow – cyan/blue na przyciskach, ikonach, hover efektach
-- ✅ SVG Neural Network z animowanymi przepływami danych (animateMotion)
-- ✅ Tilt 3D na kartach Bento Grid (JavaScript)
-- ✅ Scroll reveal (IntersectionObserver)
-- ✅ Counter animation na statystykach Hero
-- ✅ Aktywne linki nawigacyjne podczas scrollowania
-- ✅ Neon divider lines między sekcjami
+## Jak zastąpić obecną stronę o automatyzacji AI na better-move.pl
 
----
+Ta operacja jest **podmianą dotychczasowej witryny**, nie tworzy drugiej strony na innej domenie.
 
-## 📁 Struktura plików
+1. Zaloguj się na [Vercel Dashboard](https://vercel.com/dashboard) i otwórz projekt, do którego podłączona jest domena `better-move.pl` (Settings → Domains). Sprawdź również `www.better-move.pl`.
+2. **Zabezpiecz starą wersję**: historia Deployments w Vercel umożliwia rollback; dla pewności skopiuj obecne repozytorium przed zmianami.
+3. Jeśli projekt jest podłączony do GitHub/GitLab/Bitbucket: zastąp pliki repozytorium produkcyjnego plikami z tego katalogu. W ustawieniach Vercel ustaw **Framework Preset: Other**, **Root Directory** na katalog zawierający `index.html`, **Build Command** pozostaw puste i **Output Directory** pozostaw puste (statyczne pliki z katalogu głównego). Commit i push do gałęzi produkcyjnej (zwykle `main`) opublikują nową wersję.
+4. Jeśli projekt nie korzysta z Git: otwórz katalog z tą stroną na swoim komputerze, zainstaluj [Vercel CLI](https://vercel.com/docs/cli) i uruchom `npx vercel link`, wybierając **istniejący projekt** (ten z domeną `better-move.pl`). Następnie `npx vercel --prod`. Uwaga: `npx vercel` wymaga Node.js i zalogowania się do Vercel.
+5. Po wdrożeniu sprawdź obie wersje domeny (`better-move.pl` i `www.better-move.pl`) oraz widok na telefonie. Jeśli odwiedzający nadal widzą stronę AI, sprawdź, czy nowa wersja trafiła do **właściwego projektu/gałęzi** i jest aktywnym deploymentem Production.
 
-```
-index.html          ← Główna strona
-css/
-  style.css         ← Wszystkie style (Dark Mode, Glassmorphism, Animations, RWD)
-js/
-  main.js           ← JS: Particles, Navbar, Reveal, Form, Tilt, News
-README.md
-```
+**Nie zmieniaj DNS**, jeżeli domena jest już poprawnie podłączona do tego samego projektu Vercel. Nie publikuj jako nowego projektu, bo wtedy domena może pozostać przy starej stronie.
 
----
+## Lokalny podgląd
 
-## 🗄️ Baza danych (Table API)
+Otwórz `index.html` przez lokalny serwer HTTP (np. w katalogu projektu: `python3 -m http.server 8000`, następnie `http://localhost:8000`). To zapewnia poprawne ładowanie zasobów z `/assets`.
 
-### Tabela: `contacts`
-Zbiera leady z formularza kontaktowego.
+## Informacje do aktualizacji przed publikacją
 
-| Pole | Typ | Opis |
-|------|-----|------|
-| `id` | text | UUID rekordu |
-| `name` | text | Imię i Nazwisko |
-| `company` | text | Nazwa firmy |
-| `email` | text | Adres e-mail |
-| `phone` | text | Telefon (opcjonalny) |
-| `message` | rich_text | Opis wyzwania biznesowego |
-| `status` | text | Status leadu: new / contacted / qualified / closed |
-
-### Endpointy API
-- `GET tables/contacts` – lista kontaktów
-- `POST tables/contacts` – zapis nowego leadu (formularz)
-- `PATCH tables/contacts/{id}` – aktualizacja statusu
-- `DELETE tables/contacts/{id}` – usunięcie
-
----
-
-## 🚀 Jak wdrożyć
-
-Przejdź do zakładki **Publish**, aby opublikować stronę i otrzymać publiczny URL.
-
----
-
-## 📋 Rekomendowane kolejne kroki
-
-1. **Dodanie bloga / CMS** – integracja z Contentful lub Notion API
-2. **Rozbudowa sekcji Case Studies** – dedykowane podstrony z opisem projektów
-3. **Chatbot AI** – widget czatu oparty na LLM (np. integracja przez publiczne API)
-4. **Analytics** – Google Analytics 4 lub Plausible
-5. **SEO** – Open Graph tags, sitemap.xml, robots.txt
-6. **Animacje wideo** – zastąpienie SVG neural network animacją Lottie lub WebGL Three.js
-
----
-
-## 🎨 Design System
-
-| Zmienna | Wartość |
-|---------|---------|
-| `--bg-primary` | `#050508` |
-| `--cyan` | `#00d4ff` |
-| `--blue-royal` | `#1a6fc4` |
-| `--glass-bg` | `rgba(8,16,32,0.6)` |
-| `--font-main` | Inter, Montserrat |
-
----
-
-*Better Move © 2025 | Powered by AI*
+- Ceny to wartości przykładowe: relaksacyjny 180 zł, sportowy 200 zł, stóp 150 zł za 60 min.
+- Telefon rezerwacji: **784 340 292**.
+- Dojazd do klienta dostępny po wcześniejszym ustaleniu terminu, lokalizacji i warunków.
+- Strona nie ma formularza zbierającego dane. Kliknięcie „Zarezerwuj wizytę” uruchamia połączenie telefoniczne, nie potwierdza rezerwacji automatycznie.
+- W razie podania w przyszłości realnej lokalizacji, godzin i adresu można rozbudować lokalne SEO i dane firmy.
